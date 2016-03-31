@@ -115,7 +115,8 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
             this.tvUserName = (TextView) itemView.findViewById(R.id.tvUserName);
             this.tvScreenName = (TextView) itemView.findViewById(R.id.tvScreenName);
             this.tvTime = (TextView) itemView.findViewById(R.id.tvTime);
-
+            this.tvBody = (TextView) itemView.findViewById(R.id.tvBody);
+            
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
