@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="colorPrimaryDark">#1976d2</color>
     <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="user_name_color">#000000</color>
+    <color name="body_color">#2C3236</color>
+    <color name="twitter_color">#1E97E0</color>
+    <color name="line_color">#E1E8ED</color>
+    <color name="accent_material_light">#55acee</color>
+    <color name="primary_material_dark">#55acee</color>
+    <color name="primary_dark_material_dark">#1976d2</color>
+    <color name="primary_text_material_dark">#ffffff</color>
+    <color name="twitter_blue">#55acee</color>
+    <color name="darker_twitter_blue">#1976D2</color>
 </resources>
