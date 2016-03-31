@@ -34,4 +34,5 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         android:src="@drawable/ic_compose" />
+
 </android.support.design.widget.CoordinatorLayout>

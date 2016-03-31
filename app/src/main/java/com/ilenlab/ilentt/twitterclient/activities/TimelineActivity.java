@@ -103,15 +103,15 @@ public class TimelineActivity extends AppCompatActivity {
     private void showComposeDialog() {
         FragmentManager fm = getSupportFragmentManager();
         // pass in the URL for the user's profile image
-        String myProfileImageUrl = userAccount.getProfileImageUrl();
-        ComposeFragment composeFragment = ComposeFragment.newInstance(myProfileImageUrl);
+        String avatarUrl = userAccount.getProfileImageUrl();
+        ComposeFragment composeFragment = ComposeFragment.newInstance(avatarUrl);
         composeFragment.show(fm, "fragment_compose");
     }
 
     private void showTweetDetailDialog(int position) {
         FragmentManager fm = getSupportFragmentManager();
-        String avataUrl = userAccount.getProfileImageUrl();
-        ComposeFragment composeFragment = ComposeFragment.newInstance(avataUrl);
+        String avatarUrl = userAccount.getProfileImageUrl();
+        ComposeFragment composeFragment = ComposeFragment.newInstance(avatarUrl);
         composeFragment.show(fm, "fragment_compose");
     }
 

@@ -50,20 +50,20 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Tweets tweets = mTweets.get(position);
+        Tweets tweet = mTweets.get(position);
 
         TextView tvUserName = holder.tvUserName;
         TextView tvScreenName = holder.tvScreenName;
         TextView tvTime = holder.tvTime;
         TextView tvBody = holder.tvBody;
 
-        tvUserName.setText(tweets.getUser().getName() + " ");
-        tvScreenName.setText("@" + tweets.getUser().getScreenName());
-        tvTime.setText(createTime(tweets.getCreatedAt()));
-        tvBody.setText(tweets.getBody());
+        tvUserName.setText(tweet.getUser().getName() + " ");
+        tvScreenName.setText("@" + tweet.getUser().getScreenName());
+        tvTime.setText(createTime(tweet.getCreatedAt()));
+        tvBody.setText(tweet.getBody());
 
         ImageView ivAvatar = holder.ivAvatar;
-        Picasso.with(holder.ivAvatar.getContext()).load(tweets.getUser().getProfileImageUrl()).fit().centerCrop().into(ivAvatar);
+        Picasso.with(holder.ivAvatar.getContext()).load(tweet.getUser().getProfileImageUrl()).fit().centerCrop().into(ivAvatar);
     }
 
     private String createTime(String createTime) {
