@@ -1,11 +1,13 @@
 package com.ilenlab.ilentt.twitterclient.activities;
 
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -77,8 +79,33 @@ public class TimelineActivity extends AppCompatActivity {
             }
         });
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.mipmap.ic_launcher);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+
         twitterClient = TwitterApplication.getRestClient();
         populateTimeline();
+
+        getUserJson();
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showComposeDialog();
+            }
+        });
+
+    }
+
+    private void showComposeDialog() {
+        FragmentManager fm = getSupportFragmentManager();
+        // pass in the URL for the user's profile image
+        String myProfileImageUrl = userAccount.getProfileImageUrl();
+        ComposeFragment composeFragment = ComposeFragment.newInstance(myProfileImageUrl);
+        composeFragment.show(fm, "fragment_compose");
     }
 
     private void showTweetDetailDialog(int position) {
@@ -111,6 +138,10 @@ public class TimelineActivity extends AppCompatActivity {
 
     }
 
+
+    public void getUserInfo(JSONObject json) {
+        userAccount = User.fromJSON(json);
+    }
 
     private void goOnTop() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(TimelineActivity.this);
@@ -161,6 +192,21 @@ public class TimelineActivity extends AppCompatActivity {
                 TextView textView = (TextView) view.findViewById(android.R.id.message);
                 textView.setTextColor(0xFFFFFFFF);
                 toast.show();
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                Log.d("DEBUG", errorResponse.toString());
+            }
+        });
+    }
+
+    public void getUserJson() {
+        // get the logged-in user's user account info
+        twitterClient.getMyUserInfo(new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject json) {
+                getUserInfo(json);
             }
 
             @Override
