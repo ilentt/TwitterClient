@@ -109,7 +109,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         public TextView tvBody;
 
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(final View itemView) {
             super(itemView);
             this.ivAvatar = (ImageView) itemView.findViewById(R.id.ivAvatar);
             this.tvUserName = (TextView) itemView.findViewById(R.id.tvUserName);
@@ -119,7 +119,9 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    if(listener != null) {
+                        listener.onItemClick(itemView, getLayoutPosition());
+                    }
                 }
             });
         }
