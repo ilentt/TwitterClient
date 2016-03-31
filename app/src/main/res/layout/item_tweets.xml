@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content" android:layout_height="wrap_content">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ImageView
-        android:layout_width="@dimen/tweet_image_height"
-        android:layout_height="@dimen/tweet_image_height"
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:layout_width="@dimen/tweet_image_size"
+        android:layout_height="@dimen/tweet_image_size"
         android:id="@+id/ivAvatar"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginLeft="35dp"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="35dp"
-        android:layout_margin="@dimen/tweet_margin" />
+        android:layout_marginLeft="@dimen/tweet_image_margin"
+        android:layout_marginStart="@dimen/tweet_image_margin"
+        android:layout_marginTop="@dimen/tweet_image_margin"
+        android:layout_marginBottom="@dimen/tweet_image_margin"
+        android:layout_margin="@dimen/tweet_margin"
+        app:riv_corner_radius="@dimen/corner_radius"
+        app:riv_oval="false"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -62,10 +67,11 @@
         android:layout_toRightOf="@+id/ivAvatar" />
 
     <View
-        android:id="@+id/line1"
+        android:id="@+id/lineBottom"
         android:layout_width="match_parent"
         android:layout_height="@dimen/line_height"
         android:minHeight="1px"
+        android:paddingTop="@dimen/line_bottom_padding_top"
         android:layout_alignParentBottom="true"
         android:background="@color/line_color" />
 

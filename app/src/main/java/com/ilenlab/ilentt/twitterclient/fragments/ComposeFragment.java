@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,9 +16,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.ilenlab.ilentt.twitterclient.R;
 import com.ilenlab.ilentt.twitterclient.activities.TimelineActivity;
-import com.squareup.picasso.Picasso;
 
 /**
  * Created by ADMIN on 3/31/2016.
@@ -51,11 +52,14 @@ public class ComposeFragment extends android.support.v4.app.DialogFragment {
         getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         // Get fields from view
         etComposeTweet = (EditText) view.findViewById(R.id.etComposeTweet);
-        ImageView ivMyProfileImage = (ImageView) view.findViewById(R.id.ivMyProfileImage);
+        ImageView ivAvatar = (ImageView) view.findViewById(R.id.ivAvatar);
         // Fetch arguments from bundle
         // display the logged-in user's profile image
         avatarUrl = getArguments().getString("profileImageUrl");
-        Picasso.with(view.getContext()).load(avatarUrl).fit().centerCrop().into(ivMyProfileImage);
+        //Picasso.with(view.getContext()).load(avatarUrl).fit().centerCrop().into(ivAvatar);
+        if(!TextUtils.isEmpty(avatarUrl)) {
+            Glide.with(this).load(avatarUrl).into(ivAvatar);
+        }
 
         // Show soft keyboard automatically and request focus to field
         etComposeTweet.requestFocus();

@@ -8,9 +8,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.ilenlab.ilentt.twitterclient.R;
 import com.ilenlab.ilentt.twitterclient.models.Tweets;
-import com.squareup.picasso.Picasso;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -63,7 +63,8 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         tvBody.setText(tweet.getBody());
 
         ImageView ivAvatar = holder.ivAvatar;
-        Picasso.with(holder.ivAvatar.getContext()).load(tweet.getUser().getProfileImageUrl()).fit().centerCrop().into(ivAvatar);
+        //Picasso.with(holder.ivAvatar.getContext()).load(tweet.getUser().getProfileImageUrl()).fit().centerCrop().into(ivAvatar);
+        Glide.with(holder.ivAvatar.getContext()).load(tweet.getUser().getProfileImageUrl()).into(ivAvatar);
     }
 
     private String createTime(String createTime) {

@@ -1,7 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="#FFFFFF"
     tools:context=".fragments.ComposeFragment">
 
@@ -12,21 +13,25 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:clickable="true"
-        android:src="@drawable/ic_close" />
+        android:src="@drawable/ic_close"
+        android:layout_alignBottom="@+id/ivAvatar" />
 
     <com.makeramen.roundedimageview.RoundedImageView
-        android:id="@+id/ivMyProfileImage"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/ivAvatar"
+        android:layout_width="@dimen/image_compose_size"
+        android:layout_height="@dimen/image_compose_size"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:scaleType="fitCenter"
-        android:layout_margin="10dp" />
+        android:layout_margin="@dimen/compose_margin"
+        app:riv_corner_radius="@dimen/corner_radius"
+        app:riv_oval="false"/>
 
     <View
-        android:id="@+id/line1"
+        android:id="@+id/lineBottom"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="@dimen/line_height"
         android:minHeight="1px"
         android:layout_below="@id/ivClose"
         android:background="@color/twitter_blue" />
@@ -36,15 +41,15 @@
         android:layout_height="wrap_content"
         android:id="@+id/etComposeTweet"
         android:hint="@string/whats_happening"
-        android:textColorHint="#C0C0C0"
+        android:textColorHint="@color/color_hint"
         android:inputType="textMultiLine|textCapSentences"
         android:lineSpacingMultiplier="1.1"
-        android:layout_below="@+id/line1"
+        android:layout_below="@+id/lineBottom"
         android:layout_alignParentLeft="true"
         android:layout_above="@+id/btnTweet"
         android:gravity="top"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp" />
+        android:paddingLeft="@dimen/compose_padding"
+        android:paddingRight="@dimen/compose_padding" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -55,11 +60,11 @@
         android:layout_alignBottom="@+id/btnTweet"
         android:layout_toLeftOf="@+id/btnTweet"
         android:layout_alignTop="@+id/btnTweet"
-        android:layout_marginRight="10dp"
+        android:layout_marginRight="@dimen/compose_padding"
         android:gravity="center_vertical" />
 
     <View
-        android:id="@+id/coverTheTealDividerICantGetRidOf"
+        android:id="@+id/vLineBottom"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_above="@id/btnTweet"
@@ -80,13 +85,13 @@
         android:text="@string/tweet"
         android:id="@+id/btnTweet"
         android:layout_marginRight="12dp"
-        android:layout_above="@+id/becauseTheDialogIgnoresBottomMarginOnTheButton"
+        android:layout_above="@+id/vLineBottom2"
         android:background="@color/twitter_blue"
         android:textColor="#ffffff"
         android:layout_alignParentRight="true" />
 
     <View
-        android:id="@+id/becauseTheDialogIgnoresBottomMarginOnTheButton"
+        android:id="@+id/vLineBottom2"
         android:layout_width="match_parent"
         android:layout_alignParentBottom="true"
         android:layout_height="12dp"

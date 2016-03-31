@@ -13,4 +13,5 @@
     <color name="primary_text_material_dark">#ffffff</color>
     <color name="twitter_blue">#55acee</color>
     <color name="darker_twitter_blue">#1976D2</color>
+    <color name="color_hint">#C0C0C0</color>
 </resources>
