@@ -73,4 +73,43 @@ public class TwitterClient extends OAuthBaseClient {
         // execute the request
         getClient().get(apiUrl, params, handler);
     }
+
+    public void getOtherUserInfo(String screenName, AsyncHttpResponseHandler handler) {
+        String apiUrl = getApiUrl("users/show.json");
+        RequestParams params = new RequestParams();
+        params.put("user_id", screenName);
+        params.put("screen_name", screenName);
+        getClient().get(apiUrl, params, handler);
+    }
+
+    public void getUserTimeline(long since_id, long max_id, String screenName, AsyncHttpResponseHandler handler) {
+        String apiUrl = getApiUrl("statuses/user_timeline.json");
+        RequestParams params = new RequestParams();
+        params.put("screen_name", screenName);
+        params.put("count", 25);
+        if (max_id > 0) {
+            // add to the list tweets older than the currently displayed tweets
+            params.put("max_id", max_id);
+        } else {
+            // start with the newest tweets
+            params.put("since_id", since_id);
+        }
+        // execute the request
+        getClient().get(apiUrl, params, handler);
+    }
+
+    public void getMentionsTimeline(long since_id, long max_id, AsyncHttpResponseHandler handler) {
+        String apiUrl = getApiUrl("statuses/mentions_timeline.json");
+        RequestParams params = new RequestParams();
+        params.put("count", 25);
+        if (max_id > 0) {
+            // add to the list tweets older than the currently displayed tweets
+            params.put("max_id", max_id);
+        } else {
+            // start with the newest tweets
+            params.put("since_id", since_id);
+        }
+        // execute the request
+        getClient().get(apiUrl, params, handler);
+    }
 }

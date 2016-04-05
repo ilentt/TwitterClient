@@ -11,18 +11,16 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.ilenlab.ilentt.twitterclient.R;
 import com.ilenlab.ilentt.twitterclient.models.Tweets;
+import com.ilenlab.ilentt.twitterclient.utils.TimeFormat;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * Created by ADMIN on 3/28/2016.
  */
 public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> {
 
-    private static OnItemClickListener listener;
+    private OnItemClickListener listener;
     private List<Tweets> mTweets;
 
     public TweetAdapter(List<Tweets> tweets) {
@@ -59,56 +57,22 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
 
         tvUserName.setText(tweet.getUser().getName() + " ");
         tvScreenName.setText("@" + tweet.getUser().getScreenName());
-        tvTime.setText(createTime(tweet.getCreatedAt()));
+        //tvTime.setText(createTime(tweet.getCreatedAt()));
+        tvTime.setText(TimeFormat.createTime(tweet.getCreatedAt()));
         tvBody.setText(tweet.getBody());
 
         ImageView ivAvatar = holder.ivAvatar;
+        ivAvatar.setTag(tweet.getUser().getScreenName());
         //Picasso.with(holder.ivAvatar.getContext()).load(tweet.getUser().getProfileImageUrl()).fit().centerCrop().into(ivAvatar);
         Glide.with(holder.ivAvatar.getContext()).load(tweet.getUser().getProfileImageUrl()).into(ivAvatar);
     }
 
-    private String createTime(String createTime) {
-        String tweetTime = "EEE MMM dd HH:mm:ss ZZZZ yyyy";
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(tweetTime, Locale.ENGLISH);
-        simpleDateFormat.setLenient(true);
-
-        String timeString;
-        long msDate = 0;
-
-        try {
-            msDate = simpleDateFormat.parse(createTime).getTime();
-        }catch(ParseException e) {
-            e.printStackTrace();
-        }
-
-        long dateString = Math.max(System.currentTimeMillis() - msDate, 0);
-        if(dateString > 604800000L) {
-            timeString = (dateString / 604800000L) + "w";
-        } else if(dateString > 86400000L) {
-            timeString = (dateString / 86400000L) + "d";
-        } else if(dateString > 3600000L) {
-            timeString = (dateString / 3600000L) + "h";
-        } else if(dateString > 60000) {
-            timeString = (dateString / 60000) + "m";
-        } else {
-            timeString = (dateString / 1000) + "s";
-        }
-        return timeString;
-    }
-
-    @Override
-    public int getItemCount() {
-        return mTweets.size();
-    }
-
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-
+    public class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView ivAvatar;
         public TextView tvUserName;
         public TextView tvScreenName;
         public TextView tvTime;
         public TextView tvBody;
-
 
         public ViewHolder(final View itemView) {
             super(itemView);
@@ -117,6 +81,15 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
             this.tvScreenName = (TextView) itemView.findViewById(R.id.tvScreenName);
             this.tvTime = (TextView) itemView.findViewById(R.id.tvTime);
             this.tvBody = (TextView) itemView.findViewById(R.id.tvBody);
+
+            this.ivAvatar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(listener != null) {
+                        listener.onItemClick(v, getLayoutPosition());
+                    }
+                }
+            });
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -127,5 +100,10 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
                 }
             });
         }
+    }
+
+    @Override
+    public int getItemCount() {
+        return mTweets.size();
     }
 }
